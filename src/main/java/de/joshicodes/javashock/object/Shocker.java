@@ -1,14 +1,29 @@
 package de.joshicodes.javashock.object;
 
+import com.google.gson.JsonObject;
 import de.joshicodes.javashock.JavaShock;
 import de.joshicodes.javashock.action.RestAction;
 import de.joshicodes.javashock.action.control.ControlData;
 import de.joshicodes.javashock.action.control.ControlRequestAction;
+import de.joshicodes.javashock.util.JsonUtil;
 import lombok.Getter;
 
 import java.util.concurrent.TimeUnit;
 
 public class Shocker {
+
+    public static Shocker fromJson(final JavaShock instance, final JsonObject data) {
+        final String id = JsonUtil.getString(data, "id");
+        final String name = JsonUtil.getString(data, "name");
+        final long rfId = JsonUtil.getLong(data, "rfId");
+        final String model = JsonUtil.getString(data, "model");
+        final boolean paused = JsonUtil.getBoolean(data, "isPaused");
+        final String hubId = JsonUtil.getString(data, "device");
+        final DeviceHub hub = instance.getHub(hubId);
+        final Shocker shocker = new Shocker(instance, id, name, rfId, model, paused, hubId);
+        instance.registerShocker(hub, shocker);
+        return shocker;
+    }
 
     private final JavaShock instance;
 

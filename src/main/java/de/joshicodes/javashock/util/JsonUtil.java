@@ -1,9 +1,6 @@
 package de.joshicodes.javashock.util;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import de.joshicodes.javashock.action.RestAction;
 
 public class JsonUtil {
 
@@ -29,13 +26,6 @@ public class JsonUtil {
 
     public static boolean getBoolean(final JsonObject shockerObject, final String key) {
         return getBoolean(shockerObject, key, false);
-    }
-
-    public static JsonElement parse(RestAction.RestResponse resp) {
-        final String body = resp.rawBody();
-        if(body != null)
-            return JsonParser.parseString(body);
-        return null;
     }
 
 }

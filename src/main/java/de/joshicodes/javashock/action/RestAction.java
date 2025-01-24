@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public abstract class RestAction<T> {
+public class RestAction<T> {
 
     protected final JavaShock instance;
 

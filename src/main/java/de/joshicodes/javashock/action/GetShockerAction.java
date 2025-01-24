@@ -20,7 +20,7 @@ public class GetShockerAction extends RestAction<HashMap<DeviceHub, List<Shocker
                 "/1/shockers/own",
                 "GET",
                 (resp) -> {
-            final JsonElement json = JsonUtil.parse(resp);
+            final JsonElement json = resp.getAsJsonElement();
             final HashMap<DeviceHub, List<Shocker>> list = new HashMap<>();
             if(json == null) return list;
             if(!json.isJsonObject()) return list;
