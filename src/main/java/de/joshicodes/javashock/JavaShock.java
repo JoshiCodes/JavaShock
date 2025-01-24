@@ -7,7 +7,6 @@ import de.joshicodes.javashock.action.RestAction;
 import de.joshicodes.javashock.action.SimpleAction;
 import de.joshicodes.javashock.object.DeviceHub;
 import de.joshicodes.javashock.object.Shocker;
-import de.joshicodes.javashock.request.RequestManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,8 +28,6 @@ public class JavaShock {
     @Getter
     private String applicationName = "JavaShock";
 
-    private final RequestManager requestManager;
-
     private final List<DeviceHub> cachedHubs;
 
     public JavaShock(final String token) {
@@ -40,8 +37,6 @@ public class JavaShock {
     public JavaShock(final String token, final String apiHost) {
         this.token = token;
         this.apiHost = apiHost;
-
-        this.requestManager = new RequestManager(apiHost);
 
         this.cachedHubs = new ArrayList<>();
 
