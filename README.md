@@ -47,4 +47,30 @@ final JavaShock shock = new JavaShock("TOKEN-HERE", "https://api.openshock.app")
 // If no URL is provided, the default URL is used.
 ```
 
+After creating the object, just use one of the available methods.
+Almost every method, returns a RestAction Object. To execute the request, you need to call the `#execute()` method.
+This method is blocking and will return the result.
+If you want to execute the request asynchronously, you can use the `#queue()` method.
+This method will return `void`, but can take a `Consumer` as a parameter, which will be called when the request is completed.
+
 Everything from here on now is pretty self-explanatory. <br>
+
+To get a Shocker by ID, use
+```java
+
+// #getShocker will check if a shocker with this ID is cached,
+// if so, it will return the cached object.
+// If not, it will fetch the shocker from the API.
+
+final RestAction<Shocker> shocker = shock.getShocker("ID").execute();
+// or
+shock.getShocker("ID").queue(shocker -> {
+    // do something with the shocker
+});
+```
+Alternatively, you can use `#retrieveShocker(String)` to fetch a `Shocker` object directly from the api.
+Or, use `#getCachedShocker(String)` to get a cached `Shocker` object or null if not cached.
+
+Almost everything is used like that. Shockers and Hubs (old: Devices) are cached upon creating the JavaShock Object.
+
+<b>Note:</b> Not everything is implemented yet. If you are unsure, check the [JavaDocs](https://repo.joshicodes.de/javadoc/releases/de/joshicodes/JavaShock/latest). If not found, it is possible that the method is not implemented yet.
