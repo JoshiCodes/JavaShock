@@ -42,6 +42,8 @@ public class JavaShock {
 
         this.cachedHubs = new ArrayList<>();
 
+        retrieveAllShockers().queue();
+
     }
 
     public RestAction<HashMap<DeviceHub, List<Shocker>>> retrieveAllShockers() {
