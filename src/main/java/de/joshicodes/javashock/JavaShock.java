@@ -46,16 +46,6 @@ public class JavaShock {
     }
 
     /**
-     * Retrieves the name of the application.
-     * @deprecated Use {@link #getCustomName()} instead.
-     * @return The name of the application
-     */
-    @Deprecated (forRemoval = true, since = "1.0.1")
-    public String getApplicationName() {
-        return customName;
-    }
-
-    /**
      * Retrieves all shockers and their hubs from the API.
      * They will automatically be cached.
      * @return The RestAction to queue or execute
