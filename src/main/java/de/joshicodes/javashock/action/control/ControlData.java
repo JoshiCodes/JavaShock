@@ -5,6 +5,7 @@ public record ControlData(ControlType type, int intensity, long duration) {
     public enum ControlType {
         SHOCK,
         VIBRATE,
+        SOUND,
         STOP;
 
         public String getName() {

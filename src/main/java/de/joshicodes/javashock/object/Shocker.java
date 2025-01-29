@@ -72,16 +72,36 @@ public class Shocker {
         return instance.getHub(hubId);
     }
 
-    public RestAction<Boolean> shock(final ControlData data) {
+    public RestAction<Boolean> prepareControl(final ControlData data) {
         return new ControlRequestAction(instance).addShockControl(this, data);
     }
 
     public RestAction<Boolean> shock(final int intensity, final int duration, final TimeUnit unit) {
-        return shock(new ControlData(ControlData.ControlType.SHOCK, intensity, unit.toMillis(duration)));
+        return prepareControl(new ControlData(ControlData.ControlType.SHOCK, intensity, unit.toMillis(duration)));
     }
 
     public RestAction<Boolean> shock(final int intensity, final int duration) {
         return shock(intensity, duration, TimeUnit.MILLISECONDS);
+    }
+
+    public RestAction<Boolean> vibrate(final int intensity, final int duration, final TimeUnit unit) {
+        return prepareControl(new ControlData(ControlData.ControlType.VIBRATE, intensity, unit.toMillis(duration)));
+    }
+
+    public RestAction<Boolean> vibrate(final int intensity, final int duration) {
+        return vibrate(intensity, duration, TimeUnit.MILLISECONDS);
+    }
+
+    public RestAction<Boolean> sound(final int duration, final TimeUnit unit) {
+        return prepareControl(new ControlData(ControlData.ControlType.SOUND, 0, unit.toMillis(duration)));
+    }
+
+    public RestAction<Boolean> sound(final int duration) {
+        return sound(duration, TimeUnit.MILLISECONDS);
+    }
+
+    public RestAction<Boolean> stop() {
+        return prepareControl(new ControlData(ControlData.ControlType.STOP, 0, 0));
     }
 
 }
