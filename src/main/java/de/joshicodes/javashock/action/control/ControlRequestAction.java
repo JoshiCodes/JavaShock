@@ -36,7 +36,7 @@ public class ControlRequestAction extends RestAction<Boolean> {
     @Override
     protected String prepareBody() {
         final JsonObject object = new JsonObject();
-        object.addProperty("customName", instance.getApplicationName());
+        object.addProperty("customName", instance.getCustomName());
         final JsonArray shocks = new JsonArray();
         data.forEach((shocker, controlData) -> {
             final JsonObject shock = new JsonObject();

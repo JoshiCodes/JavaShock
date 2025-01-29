@@ -26,7 +26,7 @@ public class JavaShock {
 
     @Setter
     @Getter
-    private String applicationName = "JavaShock";
+    private String customName = "JavaShock";
 
     private final List<DeviceHub> cachedHubs;
 
@@ -43,6 +43,16 @@ public class JavaShock {
         // Retrieve all shockers and cache them
         retrieveAllShockers().queue();
 
+    }
+
+    /**
+     * Retrieves the name of the application.
+     * @deprecated Use {@link #getCustomName()} instead.
+     * @return The name of the application
+     */
+    @Deprecated (forRemoval = true, since = "1.0.1")
+    public String getApplicationName() {
+        return customName;
     }
 
     /**
