@@ -3,6 +3,7 @@ package de.joshicodes.javashock.action.control;
 public record ControlData(ControlType type, int intensity, long duration) {
 
     public enum ControlType {
+
         SHOCK,
         VIBRATE,
         SOUND,

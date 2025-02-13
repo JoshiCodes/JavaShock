@@ -47,8 +47,9 @@ public class Shocker {
 
     /**
      * Creates a new Shocker Instance with the given id.
+     *
      * @param instance the JavaShock instance
-     * @param id the id of the shocker
+     * @param id       the id of the shocker
      */
     public Shocker(
             final JavaShock instance,
@@ -70,6 +71,7 @@ public class Shocker {
 
     /**
      * Gets the corresponding DeviceHub of this Shocker.
+     *
      * @return the DeviceHub
      */
     public DeviceHub getHub() {
@@ -85,9 +87,9 @@ public class Shocker {
      *     <li>{@link #sound(int, TimeUnit)}</li>
      *     <li>{@link #stop()}</li>
      * </ul>
+     *
      * @param data the control data
      * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
-     *
      * @see #shock(int, int, TimeUnit)
      * @see #vibrate(int, int, TimeUnit)
      * @see #sound(int, TimeUnit)
@@ -99,11 +101,11 @@ public class Shocker {
 
     /**
      * Sends a shock with the given intensity and duration.
-     * @param intensity the intensity of the shock
-     * @param duration the duration of the shock
-     * @param unit the time unit of the duration
-     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      *
+     * @param intensity the intensity of the shock
+     * @param duration  the duration of the shock
+     * @param unit      the time unit of the duration
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      * @see #shock(int, int)
      */
     public RestAction<Boolean> shock(final int intensity, final int duration, final TimeUnit unit) {
@@ -112,10 +114,10 @@ public class Shocker {
 
     /**
      * Sends a shock with the given intensity and duration.
-     * @param intensity the intensity
-     * @param duration the duration in seconds
-     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      *
+     * @param intensity the intensity
+     * @param duration  the duration in seconds
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      * @see #shock(int, int, TimeUnit)
      */
     public RestAction<Boolean> shock(final int intensity, final int duration) {
@@ -124,11 +126,11 @@ public class Shocker {
 
     /**
      * Sends a vibration with the given intensity and duration.
-     * @param intensity the intensity
-     * @param duration the duration
-     * @param unit the time unit of the duration
-     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      *
+     * @param intensity the intensity
+     * @param duration  the duration
+     * @param unit      the time unit of the duration
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      * @see #vibrate(int, int)
      */
     public RestAction<Boolean> vibrate(final int intensity, final int duration, final TimeUnit unit) {
@@ -137,10 +139,10 @@ public class Shocker {
 
     /**
      * Sends a vibration with the given intensity and duration.
-     * @param intensity the intensity
-     * @param duration the duration in seconds
-     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      *
+     * @param intensity the intensity
+     * @param duration  the duration in seconds
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      * @see #vibrate(int, int, TimeUnit)
      */
     public RestAction<Boolean> vibrate(final int intensity, final int duration) {
@@ -149,10 +151,10 @@ public class Shocker {
 
     /**
      * Sends a sound with the given duration.
-     * @param duration the duration
-     * @param unit the time unit of the duration
-     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      *
+     * @param duration the duration
+     * @param unit     the time unit of the duration
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      * @see #sound(int)
      */
     public RestAction<Boolean> sound(final int duration, final TimeUnit unit) {
@@ -161,9 +163,9 @@ public class Shocker {
 
     /**
      * Sends a sound with the given duration.
+     *
      * @param duration the duration in seconds
      * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
-     *
      * @see #sound(int, TimeUnit)
      */
     public RestAction<Boolean> sound(final int duration) {
@@ -172,6 +174,7 @@ public class Shocker {
 
     /**
      * Stops the current action of the Shocker.
+     *
      * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
      */
     public RestAction<Boolean> stop() {

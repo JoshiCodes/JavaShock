@@ -48,6 +48,7 @@ public class JavaShock {
     /**
      * Retrieves all shockers and their hubs from the API.
      * They will automatically be cached.
+     *
      * @return The RestAction to queue or execute
      */
     public RestAction<HashMap<DeviceHub, List<Shocker>>> retrieveAllShockers() {
@@ -58,7 +59,8 @@ public class JavaShock {
      * Caches a hub with its shockers.
      * <b>Does NOT create a new hub or shocker for the user.</b>
      * This Method is designed to be used internally, use with caution.
-     * @param hub The hub to cache
+     *
+     * @param hub      The hub to cache
      * @param shockers The shockers to cache
      */
     public void registerHub(final DeviceHub hub, final List<Shocker> shockers) {
@@ -70,7 +72,8 @@ public class JavaShock {
      * Caches a shocker in a hub.
      * <b>Does NOT create a new hub or shocker for the user.</b>
      * This Method is designed to be used internally, use with caution.
-     * @param hub The hub to cache the shocker in
+     *
+     * @param hub     The hub to cache the shocker in
      * @param shocker The shocker to cache
      */
     public void registerShocker(final DeviceHub hub, final Shocker shocker) {
@@ -84,14 +87,14 @@ public class JavaShock {
     /**
      * Retrieves a shocker by its ID.
      * If the shocker is not cached, it will be fetched from the API.
+     *
      * @param shockerId The ID of the shocker
      * @return The shocker or null if it does not exist
-     *
      * @see #getCachedShocker(String) #getCachedShocker(String) - to fetch the shocker from the cache
      * @see #retrieveShocker(String) #retrieveShocker(String) - to always fetch the shocker from the API
      */
     public RestAction<Shocker> getShocker(final String shockerId) {
-        if(cachedHubs
+        if (cachedHubs
                 .stream()
                 .anyMatch(hub -> hub.getShockers().stream().anyMatch(shock -> shock.getId().equals(shockerId)))
         ) {
@@ -112,9 +115,9 @@ public class JavaShock {
     /**
      * Retrieves a shocker by its ID.
      * If the shocker is not cached, null will be returned.
+     *
      * @param shockerId The ID of the shocker
      * @return The shocker or null if it does not exist
-     *
      * @see #getShocker(String) - to fetch the shocker from cache or alternatively from the API
      * @see #retrieveShocker(String)  - to always fetch the shocker from the API
      */
@@ -126,9 +129,9 @@ public class JavaShock {
      * Retrieves a shocker by its ID.
      * This method will always fetch the shocker from the API.
      * Try to use {@link #getShocker(String)} instead.
+     *
      * @param shockerId The ID of the shocker
      * @return The RestAction to queue or execute
-     *
      * @see #getShocker(String) - to fetch the shocker from cache or alternatively from the API
      * @see #getCachedShocker(String) - to fetch the shocker from the cache
      */
@@ -139,10 +142,10 @@ public class JavaShock {
                 "GET",
                 resp -> {
                     final JsonElement element = resp.getAsJsonElement();
-                    if(element == null) return null;
-                    if(!element.isJsonObject()) return null;
+                    if (element == null) return null;
+                    if (!element.isJsonObject()) return null;
                     final JsonObject object = element.getAsJsonObject();
-                    if(!object.has("data")) return null;
+                    if (!object.has("data")) return null;
                     final JsonObject data = object.getAsJsonObject("data");
                     return Shocker.fromJson(this, data);
                 }
@@ -154,11 +157,12 @@ public class JavaShock {
      * If hubs are fetched from the API, they do not contain their shockers.
      * Use {@link #retrieveAllShockers()} to retrieve all shockers and hubs instead.
      * <b>This method does not fetch the hub from the api.</b>
+     *
      * @param hubId The ID of the hub
      * @return The hub or null if it does not exist
      */
     public DeviceHub getHub(String hubId) {
-        if(
+        if (
                 cachedHubs
                         .stream()
                         .anyMatch(hub -> hub.getId().equals(hubId))

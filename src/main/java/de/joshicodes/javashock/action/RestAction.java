@@ -43,7 +43,7 @@ public class RestAction<T> {
 
     public RestAction(final JavaShock instance, final String endpoint, final String method) {
         this(instance, endpoint, method, Function.identity(), (response) -> {
-            if(response.httpResponse.statusCode() != 200)
+            if (response.httpResponse.statusCode() != 200)
                 throw new RuntimeException("Request failed with status code " + response.httpResponse.statusCode());
             return null;
         });
@@ -71,8 +71,8 @@ public class RestAction<T> {
     /**
      * Executes the request asynchronously. <br>
      * If you want to execute the request synchronously, use {@link #execute()} instead.
-     * @param success The consumer that will be called when the request was successful. Can be null.
      *
+     * @param success The consumer that will be called when the request was successful. Can be null.
      * @see #execute()
      * @see #queue()
      * @see #queue(Consumer, Consumer)
@@ -86,9 +86,9 @@ public class RestAction<T> {
     /**
      * Executes the request asynchronously. <br>
      * If you want to execute the request synchronously, use {@link #execute()} instead.
+     *
      * @param success The consumer that will be called when the request was successful. Can be null.
      * @param failure The consumer that will be called when the request failed. Can be null.
-     *
      * @see #execute()
      * @see #queue()
      * @see #queue(Consumer)
@@ -97,9 +97,9 @@ public class RestAction<T> {
         CompletableFuture.runAsync(() -> {
             try {
                 final T result = execute();
-                if(success != null) success.accept(result);
+                if (success != null) success.accept(result);
             } catch (Throwable e) {
-                if(failure != null) failure.accept(e);
+                if (failure != null) failure.accept(e);
             }
         }).join();
     }
@@ -107,6 +107,7 @@ public class RestAction<T> {
     /**
      * Executes the request and returns the result. This method is blocking. <br>
      * If you want to execute the request asynchronously, use {@link #queue()} instead.
+     *
      * @return The result of the request
      */
     public T execute() {
@@ -129,7 +130,7 @@ public class RestAction<T> {
         try {
             return client.send(request, handler);
         } catch (Exception e) {
-            if(retries > 0) {
+            if (retries > 0) {
                 return sendRequest(client, request, handler, retries - 1);
             }
             throw new RuntimeException(e);
@@ -154,7 +155,7 @@ public class RestAction<T> {
                 .uri(URI.create(url))
                 .method(method, body == null ? HttpRequest.BodyPublishers.noBody() : HttpRequest.BodyPublishers.ofString(body));
         // Add body
-        if(body != null && !method.equals("GET")) {
+        if (body != null && !method.equals("GET")) {
             request = request.header("Content-Type", contentType == null ? "application/json" : contentType);
             // send content length
             //request = request.header("Content-Length", String.valueOf(body.length()));
@@ -163,7 +164,7 @@ public class RestAction<T> {
         }
         // Apply headers
         getHeaders().forEach(request::header);
-        if(clientModifier != null) {
+        if (clientModifier != null) {
             request = clientModifier.apply(request);
         }
         return request;
@@ -172,25 +173,25 @@ public class RestAction<T> {
     public record RestResponse<A>(HttpResponse<A> httpResponse, Class<A> aClass) {
 
         public String rawBody() {
-            if(httpResponse.body() == null)
+            if (httpResponse.body() == null)
                 return null;
             return String.valueOf(httpResponse.body());
         }
 
         public JsonElement getAsJsonElement() {
-            if(httpResponse.statusCode() != 200)
+            if (httpResponse.statusCode() != 200)
                 return null;
-            if(httpResponse.body() == null)
+            if (httpResponse.body() == null)
                 return null;
             String body = String.valueOf(httpResponse.body());
-            if(body.isEmpty())
+            if (body.isEmpty())
                 return null;
             return JsonParser.parseString(body);
         }
 
         public JsonObject getAsJsonObject() {
             JsonElement element = getAsJsonElement();
-            if(element == null || !element.isJsonObject())
+            if (element == null || !element.isJsonObject())
                 return new JsonObject();
             return element.getAsJsonObject();
         }

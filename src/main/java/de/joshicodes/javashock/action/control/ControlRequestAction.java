@@ -14,7 +14,7 @@ public class ControlRequestAction extends RestAction<Boolean> {
 
     public ControlRequestAction(JavaShock instance) {
         super(instance, "/2/shockers/control", "POST", resp -> {
-            if(resp.httpResponse().statusCode() != 200)
+            if (resp.httpResponse().statusCode() != 200)
                 throw new RuntimeException("Request failed with status code " + resp.httpResponse().statusCode());
             return true;
         });
@@ -24,10 +24,10 @@ public class ControlRequestAction extends RestAction<Boolean> {
 
     public RestAction<Boolean> addShockControl(Shocker shocker, ControlData data) {
         final int intensity = data.intensity();
-        if(intensity < 0 || intensity > 100)
+        if (intensity < 0 || intensity > 100)
             throw new IllegalArgumentException("Intensity must be between 0 and 100");
         final long duration = data.duration();
-        if(duration < 0 || duration > JavaShock.MAX_SHOCK_DURATION)
+        if (duration < 0 || duration > JavaShock.MAX_SHOCK_DURATION)
             throw new IllegalArgumentException("Duration must be between 0 and " + JavaShock.MAX_SHOCK_DURATION);
         this.data.put(shocker, data);
         return this;

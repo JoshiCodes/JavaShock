@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 /**
  * Just returns the object that was passed to the constructor.
+ *
  * @param <T>
  */
 public class SimpleAction<T> extends RestAction<T> {
