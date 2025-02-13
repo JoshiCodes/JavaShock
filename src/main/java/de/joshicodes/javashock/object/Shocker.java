@@ -68,38 +68,112 @@ public class Shocker {
         this.hubId = hubId;
     }
 
-    public DeviceHub retrieveHub() {
+    /**
+     * Gets the corresponding DeviceHub of this Shocker.
+     * @return the DeviceHub
+     */
+    public DeviceHub getHub() {
         return instance.getHub(hubId);
     }
 
+    /**
+     * Prepares a control action for this Shocker.
+     * If you want to execute a specific action, you should use one of the following methods:
+     * <ul>
+     *     <li>{@link #shock(int, int, TimeUnit)}</li>
+     *     <li>{@link #vibrate(int, int, TimeUnit)}</li>
+     *     <li>{@link #sound(int, TimeUnit)}</li>
+     *     <li>{@link #stop()}</li>
+     * </ul>
+     * @param data the control data
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
+     *
+     * @see #shock(int, int, TimeUnit)
+     * @see #vibrate(int, int, TimeUnit)
+     * @see #sound(int, TimeUnit)
+     * @see #stop()
+     */
     public RestAction<Boolean> prepareControl(final ControlData data) {
         return new ControlRequestAction(instance).addShockControl(this, data);
     }
 
+    /**
+     * Sends a shock with the given intensity and duration.
+     * @param intensity the intensity of the shock
+     * @param duration the duration of the shock
+     * @param unit the time unit of the duration
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
+     *
+     * @see #shock(int, int)
+     */
     public RestAction<Boolean> shock(final int intensity, final int duration, final TimeUnit unit) {
         return prepareControl(new ControlData(ControlData.ControlType.SHOCK, intensity, unit.toMillis(duration)));
     }
 
+    /**
+     * Sends a shock with the given intensity and duration.
+     * @param intensity the intensity
+     * @param duration the duration in seconds
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
+     *
+     * @see #shock(int, int, TimeUnit)
+     */
     public RestAction<Boolean> shock(final int intensity, final int duration) {
-        return shock(intensity, duration, TimeUnit.MILLISECONDS);
+        return shock(intensity, duration, TimeUnit.SECONDS);
     }
 
+    /**
+     * Sends a vibration with the given intensity and duration.
+     * @param intensity the intensity
+     * @param duration the duration
+     * @param unit the time unit of the duration
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
+     *
+     * @see #vibrate(int, int)
+     */
     public RestAction<Boolean> vibrate(final int intensity, final int duration, final TimeUnit unit) {
         return prepareControl(new ControlData(ControlData.ControlType.VIBRATE, intensity, unit.toMillis(duration)));
     }
 
+    /**
+     * Sends a vibration with the given intensity and duration.
+     * @param intensity the intensity
+     * @param duration the duration in seconds
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
+     *
+     * @see #vibrate(int, int, TimeUnit)
+     */
     public RestAction<Boolean> vibrate(final int intensity, final int duration) {
-        return vibrate(intensity, duration, TimeUnit.MILLISECONDS);
+        return vibrate(intensity, duration, TimeUnit.SECONDS);
     }
 
+    /**
+     * Sends a sound with the given duration.
+     * @param duration the duration
+     * @param unit the time unit of the duration
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
+     *
+     * @see #sound(int)
+     */
     public RestAction<Boolean> sound(final int duration, final TimeUnit unit) {
         return prepareControl(new ControlData(ControlData.ControlType.SOUND, 0, unit.toMillis(duration)));
     }
 
+    /**
+     * Sends a sound with the given duration.
+     * @param duration the duration in seconds
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
+     *
+     * @see #sound(int, TimeUnit)
+     */
     public RestAction<Boolean> sound(final int duration) {
-        return sound(duration, TimeUnit.MILLISECONDS);
+        return sound(duration, TimeUnit.SECONDS);
     }
 
+    /**
+     * Stops the current action of the Shocker.
+     * @return the RestAction, use {@link RestAction#queue()} or {@link RestAction#execute()} to execute the action
+     */
     public RestAction<Boolean> stop() {
         return prepareControl(new ControlData(ControlData.ControlType.STOP, 0, 0));
     }
