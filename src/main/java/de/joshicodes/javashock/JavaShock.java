@@ -133,7 +133,7 @@ public class JavaShock {
      * @see #getCachedShocker(String) - to fetch the shocker from the cache
      */
     public RestAction<Shocker> retrieveShocker(final String shockerId) {
-        return new RestAction<Shocker>(
+        return new RestAction<>(
                 this,
                 "/1/shockers/" + shockerId,
                 "GET",
@@ -149,10 +149,26 @@ public class JavaShock {
         );
     }
 
+    /**
+     * Retrieves a hub by its ID.
+     * If hubs are fetched from the API, they do not contain their shockers.
+     * Use {@link #retrieveAllShockers()} to retrieve all shockers and hubs instead.
+     * <b>This method does not fetch the hub from the api.</b>
+     * @param hubId The ID of the hub
+     * @return The hub or null if it does not exist
+     */
     public DeviceHub getHub(String hubId) {
-        final DeviceHub cached = cachedHubs.stream().filter(hub -> hub.getId().equals(hubId)).findFirst().orElse(null);
-        if(cached != null) return cached;
-        // TODO: Fetch hub from API
+        if(
+                cachedHubs
+                        .stream()
+                        .anyMatch(hub -> hub.getId().equals(hubId))
+        ) {
+            return cachedHubs
+                    .stream()
+                    .filter(hub -> hub.getId().equals(hubId))
+                    .findFirst()
+                    .orElse(null);
+        }
         return null;
     }
 
