@@ -40,6 +40,12 @@
 
     <distributionManagement>
         <repository>
+            <id>github</id>
+            <name>Github Packages</name>
+            <url>https://maven.pkg.github.com/JoshiCodes/JavaShock</url>
+        </repository>
+        <!--
+        <repository>
             <id>joshicodes-de</id>
             <name>JoshiCodes Repository</name>
             <url>https://repo.joshicodes.de/releases</url>
@@ -49,6 +55,7 @@
             <name>JoshiCodes Snapshots Repository</name>
             <url>https://repo.joshicodes.de/snapshots</url>
         </snapshotRepository>
+        -->
     </distributionManagement>
 
     <dependencies>
