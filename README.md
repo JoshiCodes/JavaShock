@@ -38,7 +38,7 @@ Replace `VERSION` with the latest version seen above or found [here](https://git
 ```
 ## Usage
 To use JavaShock, you need to create a new instance with your API Token.
-You can create an API Token [here](https://openshock.app/#/dashboard/tokens).
+You can create an API Token [here](https://openshock.app/settings/api-tokens).
 
 ```java
 final JavaShock shock = new JavaShock("TOKEN-HERE");
