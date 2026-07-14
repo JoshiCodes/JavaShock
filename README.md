@@ -22,7 +22,7 @@ Replace `VERSION` with the latest version seen above or found [here](https://git
 <dependencies>
     <dependency>
         <groupId>de.joshicodes</groupId>
-        <artifactId>JavaShock</artifactId>
+        <artifactId>javashock</artifactId>
         <version>VERSION</version>
     </dependency>
 </dependencies>
