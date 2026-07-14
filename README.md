@@ -12,20 +12,11 @@
 Obviously, you need a [OpenShock](https://openshock.org) account with API Token to use this wrapper.
 
 ## Installation
-<img src="https://repo.joshicodes.de/api/badge/latest/releases/de/joshicodes/JavaShock?prefix=v&name=Version">
+![GitHub Tag](https://img.shields.io/github/v/tag/JoshiCodes/JavaShock)
 
-To use this Wrapper, you need to add the following repository and dependency to your `pom.xml` file.
+To use this Wrapper, you need to add the following dependency to your `pom.xml` file.
 Replace `VERSION` with the latest version seen above or found [here](https://github.com/JoshiCodes/JavaShock/releases).
 
-```xml
-<repositories>
-    <repository>
-        <id>joshicodes-de-releases</id>
-        <name>JoshiCodes Repository</name>
-        <url>https://repo.joshicodes.de/releases</url>
-    </repository>
-</repositories>
-```
 
 ```xml
 <dependencies>
@@ -36,6 +27,9 @@ Replace `VERSION` with the latest version seen above or found [here](https://git
     </dependency>
 </dependencies>
 ```
+
+See more at [Packages](https://github.com/JoshiCodes/JavaShock/packages/3131386).
+
 ## Usage
 To use JavaShock, you need to create a new instance with your API Token.
 You can create an API Token [here](https://openshock.app/settings/api-tokens).
